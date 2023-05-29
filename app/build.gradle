@@ -6,6 +6,12 @@ android {
     namespace 'com.example.registro'
     compileSdk 33
 
+
+        // Demás código por defecto, omitido por comodidad
+        dataBinding {
+            enabled = true
+        }
+
     defaultConfig {
         applicationId "com.example.registro"
         minSdk 24
