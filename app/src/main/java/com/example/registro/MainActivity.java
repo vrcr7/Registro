@@ -44,32 +44,40 @@ public class MainActivity extends AppCompatActivity {
                 CharSequence text="Datos vacios";
                 CharSequence text2="error de password";
                 CharSequence text3="solo se permiten letras, nombre y apellido no validos";
+                CharSequence text4="formato de correo no valido";
                 int duracion = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context,text,duracion);
                 Toast toast2 = Toast.makeText(context,text2,duracion);
                 Toast toast3 = Toast.makeText(context,text3,duracion);
+                Toast toast4 = Toast.makeText(context,text4,duracion);
 
-                if ((!nombre.getText().toString().trim().equals("")) && (!apellido.getText().toString().trim().equals("")) && (!correo.getText().toString().trim().equals(""))){
+
+                //validamos campos vacios
+                if ((!nombre.getText().toString().trim().equals("")) && (!apellido.getText().toString().trim().equals(""))
+                        && (!correo.getText().toString().trim().equals(""))){
+                    //patrones de validacion
                     Pattern pat = Pattern.compile("[a-zA-Z]{2,10}");
                //     Pattern pat2 = Pattern.compile("[0-9]*{2,10}");
+                    Pattern patEmail = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
                     Matcher mat = pat.matcher(nombre.getText().toString());
                     Matcher mat2 = pat.matcher(apellido.getText().toString());
-                  //  Matcher mat3 = pat.matcher(variable.getText().toString());
-
-                    if(mat.matches() && mat2.matches())
-                        if (password.getText().toString().equals(pass)) {
-                            //redireccionar a la activity 2
-                            Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-                            intent.putExtra("name", nombre.getText().toString());
-                            intent.putExtra("surname", apellido.getText().toString());
-                            intent.putExtra("email", correo.getText().toString());
-                            startActivity(intent);
-                        } else {
-                            toast2.show();
-                        }
-                    else { toast3.show();}
-                }
-                else {toast.show();}
+                    Matcher mat3 = patEmail.matcher(correo.getText().toString());
+                    //validamos que nombre y apellido sean validos, letras mayusculas y minusculas
+                    if(mat.matches() && mat2.matches()) {
+                        //validamos formato de correo
+                        if (mat3.matches()) {
+                            //validamos contraseña
+                            if (password.getText().toString().equals(pass)) {
+                                //redireccionar a la activity 2
+                                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                                intent.putExtra("name", nombre.getText().toString());
+                                intent.putExtra("surname", apellido.getText().toString());
+                                intent.putExtra("email", correo.getText().toString());
+                                startActivity(intent);
+                             } else {toast2.show();}
+                        } else {toast4.show();}
+                    }else { toast3.show();}
+                }else {toast.show();}
             }
         });
 
