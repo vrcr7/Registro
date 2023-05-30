@@ -35,7 +35,7 @@ public class MainActivity2 extends AppCompatActivity {
         back = (Button) findViewById(R.id.volver);
         mes = (TextView) findViewById(R.id.mensaje);
 
-        mes.setText("el nombre es :"+nombre+" "+apellido+" "+correo);
+        mes.setText("el nombre es :"+nombre+" apellido : "+apellido+" correo : "+correo);
 
 
         back.setOnClickListener(new View.OnClickListener() {
