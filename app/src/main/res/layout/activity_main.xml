@@ -4,6 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="nombre"
+            type="java.lang.String" />
+        <variable
+            name="apellido"
+            type="java.lang.String" />
+        <variable
+            name="email"
+            type="java.lang.String" />
+        <variable
+            name="contrasenia"
+            type="java.lang.String" />
 
     </data>
 

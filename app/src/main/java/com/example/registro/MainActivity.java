@@ -2,6 +2,7 @@ package com.example.registro;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
+import com.example.registro.databinding.ActivityMainBinding;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,17 +27,30 @@ public class MainActivity extends AppCompatActivity {
     TextView correo;
     TextView password;
     String pass = "1234";
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //capturar elementos
-        enviar =(Button) findViewById(R.id.send);
-        nombre=(TextView) findViewById(R.id.nombre);
-        apellido=(TextView) findViewById(R.id.apellido);
-        password =(TextView) findViewById(R.id.contrasenia);
-        correo= (TextView) findViewById(R.id.email);
+       // setContentView(R.layout.activity_main);
+
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        setContentView(binding.getRoot());
+
+       //capturar elementos
+       // enviar =(Button) findViewById(R.id.send);
+       // nombre=(TextView) findViewById(R.id.nombre);
+       // apellido=(TextView) findViewById(R.id.apellido);
+       // password =(TextView) findViewById(R.id.contrasenia);
+       // correo= (TextView) findViewById(R.id.email);
+        nombre = binding.nombre;
+        enviar = binding.send;
+        apellido = binding.apellido;
+        password = binding.contrasenia;
+        correo = binding.email;
+        //
+        //binding.getNombre();
 
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
